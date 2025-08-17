@@ -1,78 +1,157 @@
-# Uzence Frontend
+# Uzence Frontend Components
 
-A modern React application for the Uzence platform.
+A React component library featuring high-quality, reusable UI components built with TypeScript and TailwindCSS.
 
-## Project Overview
+## Technical Stack
 
-This is the frontend repository for the Uzence application, built with React and TypeScript.
+- React
+- TypeScript
+- TailwindCSS
+- Storybook
+
+## Components
+
+This library currently includes two main components:
+
+### 1. InputField
+
+A flexible and customizable input component with various validation states and appearance options.
+
+**Features:**
+- Text input with label, placeholder, helper text, and error message
+- Multiple states: disabled, invalid, loading
+- Multiple variants: filled, outlined, ghost
+- Size options: small, medium, large
+- Optional features: clear button, password toggle
+- Theme support: light & dark
+
+### 2. DataTable
+
+A powerful data table component for displaying and interacting with tabular data.
+
+**Features:**
+- Display tabular data with customizable columns
+- Column sorting functionality
+- Single and multiple row selection
+- Loading state handling
+- Empty state display
 
 ## Setup Instructions
 
-Follow these steps to set up the project locally:
+### Prerequisites
 
-1. **Clone the repository**
+- Node.js (v14.x or later)
+- npm (v6.x or later)
+
+### Installation
+
+1. Clone the repository:
    ```
-   git clone <repository-url>
+   git clone https://github.com/your-username/uzence-frontend.git
    cd uzence-frontend
    ```
 
-2. **Install dependencies**
+2. Install dependencies:
    ```
    npm install
    ```
 
-3. **Environment Configuration**
-   - Create a `.env` file in the root directory
-   - Copy the contents from `.env.example` and update the values as needed
-
-4. **Start the development server**
+3. Create a `.env` file in the root directory if needed:
    ```
-   npm start
+   REACT_APP_API_URL=http://localhost:8000/api
    ```
 
-## Original Create React App Documentation
+### Development
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To start the development server:
 
-### Available Scripts
+```
+npm start
+```
 
-In the project directory, you can run:
+### Running Storybook
 
-#### `npm start`
+To launch Storybook for component development and documentation:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+npm run storybook
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This will start Storybook at [http://localhost:6006](http://localhost:6006).
 
-#### `npm test`
+### Testing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To run tests:
 
-#### `npm run build`
+```
+npm test
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Usage Examples
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### InputField
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```tsx
+import { InputField } from './components/InputField';
 
-#### `npm run eject`
+function MyForm() {
+  return (
+    <InputField
+      label="Email Address"
+      placeholder="Enter your email"
+      helperText="We'll never share your email with anyone else"
+      variant="outlined"
+      size="md"
+    />
+  );
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### DataTable
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```tsx
+import { DataTable } from './components/DataTable';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+function UserList() {
+  const columns = [
+    { key: 'id', title: 'ID', dataIndex: 'id', sortable: true },
+    { key: 'name', title: 'Name', dataIndex: 'name', sortable: true },
+    { key: 'email', title: 'Email', dataIndex: 'email', sortable: false },
+  ];
+  
+  const data = [
+    { id: 1, name: 'John Doe', email: 'john@example.com' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+  ];
+  
+  return (
+    <DataTable
+      data={data}
+      columns={columns}
+      selectable={true}
+      onRowSelect={(rows) => console.log('Selected rows:', rows)}
+    />
+  );
+}
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Project Structure
 
-### Learn More
+```
+src/
+├── components/
+│   ├── InputField/
+│   │   ├── InputField.tsx
+│   │   ├── InputField.test.tsx
+│   │   ├── InputField.stories.tsx
+│   │   └── index.ts
+│   ├── DataTable/
+│   │   ├── DataTable.tsx
+│   │   ├── DataTable.test.tsx
+│   │   ├── DataTable.stories.tsx
+│   │   └── index.ts
+├── styles/        # Global styles and TailwindCSS configuration
+├── utils/         # Utility functions
+└── App.tsx        # Demo application
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
